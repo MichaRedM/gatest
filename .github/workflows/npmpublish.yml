@@ -23,26 +23,7 @@ jobs:
          git config --global user.email "you@example.com"
          git config --global user.name "CI"
          git commit -m "docs(*): regenerate type documentation"
-      - run: npm version patch --no-git-tag-version
-        if: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/heads/release/patch'))
-        name: 'increase patch version'
-      - run: npm version patch --no-git-tag-version
-        if: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/heads/release/patch'))
-        name: 'increase patch version'
-      - run: npm version patch --no-git-tag-version
-        if: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/heads/release/patch'))
-        name: 'increase patch version'
-      - name: Extract version
-        id: extract_version
-        uses: Saionaro/extract-package-version@v1.0.6
-      - run: npm version --no-git-tag-version {{ steps.extract_version.outputs.version }}
-        working-directory: ./app1
-      - run: npm version --no-git-tag-version {{ steps.extract_version.outputs.version }}
-        working-directory: ./app2
-      - run: npm version --no-git-tag-version {{ steps.extract_version.outputs.version }}
-        working-directory: ./app3
-      - run: git add .package.json ./app1/package.json ./app2/package.json ./app3/package.json
-      - run: "git commit -m 'chore(*): update app to version {{steps.extract_version.outputs.version}}'"
+      - run: npm run release -- --skip.tag
       - run: git push
 #   build:
 #     runs-on: ubuntu-latest
