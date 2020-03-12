@@ -47,6 +47,8 @@ jobs:
       with:
         name: app1-build
         path: ./app1
+    - run: npm i ../app1
+      working-directory: ./app2
     - run: npm ci
       working-directory: ./app2
     - run: npm run build
@@ -74,6 +76,8 @@ jobs:
       with:
         name: app1-build
         path: ./app3
+    - run: npm i ../app1
+      working-directory: ./app3
     - run: npm ci
       working-directory: ./app3
     - run: npm run build

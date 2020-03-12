@@ -9,5 +9,8 @@
     "test": "echo \"Error: no test specified\""
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "gatest-app1": "1.0.0"
+  }
 }
