@@ -18,8 +18,11 @@ jobs:
           node-version: 12
       - run: npm i
       - run: npm run typedoc
-      - run: git add docs/*
-      - run: 'git commit -m "docs(*): regenerate type documentation"'
+      - run: |
+         git add docs/*
+         git config --global user.email "you@example.com"
+         git config --global user.name "CI"
+         'git commit -m "docs(*): regenerate type documentation"'
       - name: "Automated Version Bump"
         uses: "phips28/gh-action-bump-version@master"
         with:
