@@ -5,9 +5,11 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "typedoc": "node node_modules/typedoc/bin/typedoc --options ./typedoc.json ./"
+    "typedoc": "node node_modules/typedoc/bin/typedoc --options ./typedoc.json ./",
+    "release": "standard-version"
   },
   "dependencies": {
+    "standard-version": "^7.1.0",
     "typedoc": "^0.15.4",
     "typedoc-plugin-external-module-map": "^1.0.0"
   },
@@ -20,5 +22,10 @@
   "bugs": {
     "url": "https://github.com/MichaRedM/gatest/issues"
   },
-  "homepage": "https://github.com/MichaRedM/gatest#readme"
+  "homepage": "https://github.com/MichaRedM/gatest#readme",
+  "standard-version": {
+    "skip": {
+      "tag": true
+    }
+  }
 }

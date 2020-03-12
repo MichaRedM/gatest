@@ -1,0 +1,36 @@
+{
+    "bumpFiles": [
+        {
+            "filename": "package.json",
+            "type": "json"
+        },
+        {
+            "filename": "package-lock.json",
+            "type": "json"
+        },
+        {
+            "filename": "/app1/package.json",
+            "type": "json"
+        },
+        {
+            "filename": "/app1/package-lock.json",
+            "type": "json"
+        },
+        {
+            "filename": "/app2/package.json",
+            "type": "json"
+        },
+        {
+            "filename": "/app2/package-lock.json",
+            "type": "json"
+        },
+        {
+            "filename": "/app3/package.json",
+            "type": "json"
+        },
+        {
+            "filename": "/app3/package-lock.json",
+            "type": "json"
+        }
+    ]
+}
