@@ -22,7 +22,7 @@ jobs:
          git add docs/*
          git config --global user.email "you@example.com"
          git config --global user.name "CI"
-         'git commit -m "docs(*): regenerate type documentation"'
+         git commit -m "docs(*): regenerate type documentation"
       - name: "Automated Version Bump"
         uses: "phips28/gh-action-bump-version@master"
         with:
