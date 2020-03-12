@@ -27,7 +27,7 @@ jobs:
     - uses: actions/upload-artifact@v1
       with:
         name: app1-build
-        path: ./app1
+        path: ./app1/dist
 
   build-app2:
     needs: build-app1
@@ -51,3 +51,34 @@ jobs:
       working-directory: ./app2
     - run: npm run build
       working-directory: ./app2
+    - uses: actions/upload-artifact@v1
+      with:
+        name: app2-build
+        path: ./app2/dist
+
+  build-app3:
+    needs: build-app1
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [10.x, 12.x]
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - uses: actions/download-artifact@v1
+      with:
+        name: app1-build
+        path: ./app3
+    - run: npm ci
+      working-directory: ./app3
+    - run: npm run build
+      working-directory: ./app3
+    - uses: actions/upload-artifact@v1
+      with:
+        name: app3-build
+        path: ./app3/dist
