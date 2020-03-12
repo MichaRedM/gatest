@@ -2,7 +2,7 @@
     "bumpFiles": [
         {
             "filename": "package.json",
-            "type": "json"
+            "updater": "app-updater.js"
         },
         {
             "filename": "package-lock.json",
@@ -10,7 +10,7 @@
         },
         {
             "filename": "app1/package.json",
-            "type": "json"
+            "updater": "app-updater.js"
         },
         {
             "filename": "app1/package-lock.json",
@@ -18,7 +18,7 @@
         },
         {
             "filename": "app2/package.json",
-            "type": "json"
+            "updater": "app-updater.js"
         },
         {
             "filename": "app2/package-lock.json",
@@ -26,7 +26,7 @@
         },
         {
             "filename": "app3/package.json",
-            "type": "json"
+            "updater": "app-updater.js"
         },
         {
             "filename": "app3/package-lock.json",
