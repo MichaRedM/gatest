@@ -75,7 +75,7 @@ jobs:
     - uses: actions/download-artifact@v1
       with:
         name: app1-build
-        path: ./app3
+        path: ./app1
     - run: npm i ../app1
       working-directory: ./app3
     - run: npm ci
