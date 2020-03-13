@@ -28,10 +28,12 @@ jobs:
     needs: update-version
     runs-on: ubuntu-latest
     steps:
+    - uses: actions/checkout@v2
+      with:
+        ref: ${{github.ref}}
     - uses: actions/setup-node@v1
       with:
         node-version: 12
-    - uses: actions/checkout@v2
     - run: npm i
       working-directory: ./app1
     - run: npm run build
@@ -47,6 +49,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+      with:
+        ref: ${{github.ref}}
     - uses: actions/setup-node@v1
       with:
         node-version: 12
@@ -63,6 +67,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+      with:
+        ref: ${{github.ref}}
     - uses: actions/setup-node@v1
       with:
         node-version: 12
