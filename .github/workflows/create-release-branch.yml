@@ -46,22 +46,24 @@ jobs:
         with:
           name: branch-name
           path: ./
-      - run: cat ./branch-name.txt
+      - run: echo "##[set-output name=branch-name;] $(echo "##[set-output name=branch-name;] $(cat ./branch-name.txt)")"
         id: branch-name
       - run: rm ./branch-name.txt
       - name: pull-request
         uses: repo-sync/pull-request@v2
         with:
+          source_branch: ${{ steps.branch-name.outputs.branch-name }}
           destination_branch: "master"
-          pr_title: "release: ${{ steps.branch-name.outputs }} -> master"
-          pr_body: "${{ steps.branch-name.outputs }}"
+          pr_title: "release: ${{ steps.branch-name.outputs.branch-name }} -> master"
+          pr_body: "${{ steps.branch-name.outputs.branch-name }}"
           github_token: ${{ secrets.GITHUB_TOKEN }}
       - name: pull-request
         uses: repo-sync/pull-request@v2
         with:
+          source_branch: ${{ steps.branch-name.outputs.branch-name }}
           destination_branch: "develop"
-          pr_title: "release: ${{ steps.branch-name.outputs }} -> develop"
-          pr_body: "${{ steps.branch-name.outputs }}"
+          pr_title: "release: ${{ steps.branch-name.outputs.branch-name }} -> develop"
+          pr_body: "${{ steps.branch-name.outputs.branch-name }}"
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
   update-version:
@@ -72,12 +74,12 @@ jobs:
         with:
           name: branch-name
           path: ./
-      - run: cat ./branch-name.txt
+      - run: echo "##[set-output name=branch-name;] $(echo "##[set-output name=branch-name;] $(cat ./branch-name.txt)")"
         id: branch-name
       - run: rm ./branch-name.txt
       - uses: actions/checkout@v2
         with:
-          ref: ${{steps.branch-name.outputs}}
+          ref: ${{steps.branch-name.outputs.branch-name}}
       - uses: actions/setup-node@v1
         with:
           node-version: 12
@@ -96,12 +98,12 @@ jobs:
         with:
           name: branch-name
           path: ./
-      - run: cat ./branch-name.txt
+      - run: echo "##[set-output name=branch-name;] $(cat ./branch-name.txt)"
         id: branch-name
       - run: rm ./branch-name.txt
       - uses: actions/checkout@v2
         with:
-          ref: ${{steps.branch-name.outputs}}
+          ref: ${{steps.branch-name.outputs.branch-name}}
       - uses: actions/setup-node@v1
         with:
           node-version: 12
@@ -123,12 +125,12 @@ jobs:
         with:
           name: branch-name
           path: ./
-      - run: cat ./branch-name.txt
+      - run: echo "##[set-output name=branch-name;] $(cat ./branch-name.txt)"
         id: branch-name
       - run: rm ./branch-name.txt
       - uses: actions/checkout@v2
         with:
-          ref: ${{steps.branch-name.outputs}}
+          ref: ${{steps.branch-name.outputs.branch-name}}
       - uses: actions/setup-node@v1
         with:
           node-version: 12
