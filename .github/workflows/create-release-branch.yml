@@ -141,6 +141,31 @@ jobs:
           name: app2-build
           path: ./app2/dist
 
+  build-app3:
+    needs: publish-npm-app1
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/download-artifact@v1
+        with:
+          name: branch-name
+          path: ./
+      - run: echo "##[set-output name=branch-name;]$(cat ./branch-name.txt)"
+        id: branch-name
+      - run: rm ./branch-name.txt
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{steps.branch-name.outputs.branch-name}}
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - run: npm run build
+        working-directory: ./app3
+      - uses: actions/upload-artifact@v1
+        with:
+          name: app3-build
+          path: ./app3/dist
+
   publish-npm-app1:
     needs: build-app1
     runs-on: ubuntu-latest
