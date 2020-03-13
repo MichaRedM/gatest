@@ -46,7 +46,7 @@ jobs:
         with:
           name: branch-name
           path: ./
-      - run: echo "##[set-output name=branch-name;] $(echo "##[set-output name=branch-name;] $(cat ./branch-name.txt)")"
+      - run: echo "##[set-output name=branch-name;] $(cat ./branch-name.txt)"
         id: branch-name
       - run: rm ./branch-name.txt
       - name: pull-request
@@ -74,7 +74,7 @@ jobs:
         with:
           name: branch-name
           path: ./
-      - run: echo "##[set-output name=branch-name;] $(echo "##[set-output name=branch-name;] $(cat ./branch-name.txt)")"
+      - run: echo "##[set-output name=branch-name;] $(cat ./branch-name.txt)"
         id: branch-name
       - run: rm ./branch-name.txt
       - uses: actions/checkout@v2
