@@ -17,10 +17,10 @@ jobs:
         with:
           allowed: >
             ready-to-deploy
-      - uses: github-actions-up-and-running/pr-comment@v1.0.0
-        with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          message: 'Starting release :rocket Please do not merge into this branch anymore!'
+      # - uses: github-actions-up-and-running/pr-comment@v1.0.0
+      #   with:
+      #     repo-token: ${{ secrets.GITHUB_TOKEN }}
+      #     message: 'Starting release :rocket Please do not merge into this branch anymore!'
 
   update-version:
     runs-on: ubuntu-latest
@@ -54,8 +54,8 @@ jobs:
         uses: managedkaos/merge-pull-request@v1.2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - uses: github-actions-up-and-running/pr-comment@v1.0.0
-        with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          message: 'Merged into Master. Please merge "-> develop" PR and delete the branch.'
+      # - uses: github-actions-up-and-running/pr-comment@v1.0.0
+      #   with:
+      #     repo-token: ${{ secrets.GITHUB_TOKEN }}
+      #     message: 'Merged into Master. Please merge "-> develop" PR and delete the branch.'
 
