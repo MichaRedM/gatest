@@ -21,9 +21,10 @@ jobs:
       - run: npm i
       - run: npm run typedoc
       - run: |
-         git add docs/*
          git config --global user.email "you@example.com"
          git config --global user.name "CI"
+      - run: |
+         git add docs/*
          git commit -m "docs(*): regenerate type documentation"
       - run: npm run release -- --skip.tag --skip.commit --skip.changelog
       - name: Extract version
@@ -40,6 +41,9 @@ jobs:
     - uses: actions/setup-node@v1
       with:
         node-version: 12
+    - run: |
+        git config --global user.email "you@example.com"
+        git config --global user.name "CI"
     - run: npm i
     - run: npm run release -- --skip.tag --skip.commit
     - name: Extract version
@@ -73,6 +77,9 @@ jobs:
         with:
           node-version: 12
       - run: npm i
+      - run: |
+          git config --global user.email "you@example.com"
+          git config --global user.name "CI"
       - run: npm run release -- --prerelease --skip.changelog
       - run: git push
 

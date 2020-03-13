@@ -17,6 +17,9 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 12
+      - run: |
+          git config --global user.email "you@example.com"
+          git config --global user.name "CI"
       - run: npm i
       - run: npm run release -- --prerelease --skip.changelog
       - run: git push
