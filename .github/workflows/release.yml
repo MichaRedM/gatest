@@ -6,7 +6,7 @@ name: Merge+Release
 on:
   pull_request:
     branches:
-      - "release/**"
+      - 'release/**'
     types: [labeled]
 
 jobs:
