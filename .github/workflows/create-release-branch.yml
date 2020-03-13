@@ -153,7 +153,7 @@ jobs:
         with:
           name: app1-build
           path: ./app1
-      - run: npm publish
+      - run: npm publish --tag beta
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
         working-directory: ./app1
@@ -171,7 +171,7 @@ jobs:
         with:
           name: app1-build
           path: ./app1
-      - run: npm publish
+      - run: npm publish --tag beta
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
         working-directory: ./app1
@@ -188,7 +188,7 @@ jobs:
         with:
           name: app2-build
           path: ./app2
-      - run: npm publish
+      - run: npm publish --tag beta
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
         working-directory: ./app2
@@ -206,7 +206,7 @@ jobs:
         with:
           name: app2-build
           path: ./app2
-      - run: npm publish
+      - run: npm publish --tag beta
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
         working-directory: ./app2
@@ -223,7 +223,7 @@ jobs:
         with:
           name: app2-build
           path: ./app2
-      - run: npm publish
+      - run: npm publish --tag beta
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
         working-directory: ./app2
@@ -241,7 +241,7 @@ jobs:
         with:
           name: app2-build
           path: ./app2
-      - run: npm publish
+      - run: npm publish --tag beta
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
         working-directory: ./app2
