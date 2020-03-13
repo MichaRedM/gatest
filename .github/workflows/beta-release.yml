@@ -1,0 +1,161 @@
+# This workflow will run tests using node and then publish a package to GitHub Packages when a release is created
+# For more information see: https://help.github.com/actions/language-and-framework-guides/publishing-nodejs-packages
+
+name: Node.js Package
+
+
+on:
+  push:
+    branches:
+      - release/**
+
+jobs:
+  update-version:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - run: npm i
+      - run: npm run release -- --prerelease
+      - run: git push
+
+  build-app1:
+    needs: update-version
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+    - run: npm i
+      working-directory: ./app1
+    - run: npm run build
+      working-directory: ./app1
+    - uses: actions/upload-artifact@v1
+      with:
+        name: app1-build
+        path: ./app1/dist
+
+  build-app2:
+    needs: publish-npm-app1
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+    - run: npm run build
+      working-directory: ./app2
+    - uses: actions/upload-artifact@v1
+      with:
+        name: app2-build
+        path: ./app2/dist
+
+  publish-npm-app1:
+    needs: build-app1
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+          registry-url: https://registry.npmjs.org/
+      - uses: actions/download-artifact@v1
+        with:
+          name: app1-build
+          path: ./app1
+      - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
+        working-directory: ./app1
+
+  publish-gpr-app1:
+    needs: build-app1
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+          registry-url: https://npm.pkg.github.com/
+          scope: '@your-github-username'
+       - uses: actions/download-artifact@v1
+        with:
+          name: app1-build
+          path: ./app1
+      - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        working-directory: ./app1
+    
+  publish-npm-app2:
+    needs: build-app2
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+          registry-url: https://registry.npmjs.org/
+      - uses: actions/download-artifact@v1
+        with:
+          name: app2-build
+          path: ./app2
+      - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
+        working-directory: ./app2
+
+  publish-gpr-app2:
+    needs: build-app2
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+          registry-url: https://npm.pkg.github.com/
+          scope: '@your-github-username'
+       - uses: actions/download-artifact@v1
+        with:
+          name: app2-build
+          path: ./app2
+      - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        working-directory: ./app2
+    
+  publish-npm-app3:
+    needs: build-app2
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+          registry-url: https://registry.npmjs.org/
+      - uses: actions/download-artifact@v1
+        with:
+          name: app2-build
+          path: ./app2
+      - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
+        working-directory: ./app2
+
+  publish-gpr-app3:
+    needs: build-app2
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+          registry-url: https://npm.pkg.github.com/
+          scope: '@your-github-username'
+       - uses: actions/download-artifact@v1
+        with:
+          name: app2-build
+          path: ./app2
+      - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        working-directory: ./app2
+

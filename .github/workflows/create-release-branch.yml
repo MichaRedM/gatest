@@ -9,7 +9,7 @@ on:
     types: [closed]
 
 jobs:
-  update-branch:
+  create-release-branch:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -31,41 +31,3 @@ jobs:
         uses: Saionaro/extract-package-version@v1.0.6
       - run: git reset HEAD --hard
       - run: git push -u origin release:release/${{ steps.extract_version.outputs.version }}
-#   build:
-#     runs-on: ubuntu-latest
-#     steps:
-#       - uses: actions/checkout@v2
-#       - uses: actions/setup-node@v1
-#         with:
-#           node-version: 12
-#       - run: npm ci
-#       - run: npm test
-
-#   publish-npm:
-#     needs: build
-#     runs-on: ubuntu-latest
-#     steps:
-#       - uses: actions/checkout@v2
-#       - uses: actions/setup-node@v1
-#         with:
-#           node-version: 12
-#           registry-url: https://registry.npmjs.org/
-#       - run: npm ci
-#       - run: npm publish
-#         env:
-#           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
-
-#   publish-gpr:
-#     needs: build
-#     runs-on: ubuntu-latest
-#     steps:
-#       - uses: actions/checkout@v2
-#       - uses: actions/setup-node@v1
-#         with:
-#           node-version: 12
-#           registry-url: https://npm.pkg.github.com/
-#           scope: '@your-github-username'
-#       - run: npm ci
-#       - run: npm publish
-#         env:
-#           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
