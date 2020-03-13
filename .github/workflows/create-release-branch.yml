@@ -29,11 +29,11 @@ jobs:
       - name: Extract version
         id: extract_version
         uses: Saionaro/extract-package-version@v1.0.6
-      - run: echo release/${{steps.extract_version.outputs.version}} > /branch-name.txt
+      - run: echo release/${{steps.extract_version.outputs.version}} > ./branch-name.txt
       - uses: actions/upload-artifact@v1
         with:
           name: branch-name
-          path: /branch-name.txt
+          path: ./branch-name.txt
       - run: git reset HEAD --hard
       - run: git push -u origin release:release/${{ steps.extract_version.outputs.version }}
 
@@ -45,12 +45,13 @@ jobs:
       - uses: actions/download-artifact@v1
         with:
           name: branch-name
-          path: /branch-name.txt
-      - name: Read /branch-name.txt
+          path: ./branch-name.txt
+      - name: Read ./branch-name.txt
         id: branch-name
         uses: juliangruber/read-file-action@v1
         with:
-          path: /branch-name.txt
+          path: ./branch-name.txt
+      - run: rm ./branch-name.txt
       - name: pull-request
         uses: repo-sync/pull-request@v2
         with:
@@ -73,12 +74,13 @@ jobs:
       - uses: actions/download-artifact@v1
         with:
           name: branch-name
-          path: /branch-name.txt
-      - name: Read /branch-name.txt
+          path: ./branch-name.txt
+      - name: Read ./branch-name.txt
         id: branch-name
         uses: juliangruber/read-file-action@v1
         with:
-          path: /branch-name.txt
+          path: ./branch-name.txt
+      - run: rm ./branch-name.txt
       - uses: actions/checkout@v2
         with:
           ref: ${{steps.branch-name.outputs.content}}
@@ -99,12 +101,13 @@ jobs:
       - uses: actions/download-artifact@v1
         with:
           name: branch-name
-          path: /branch-name.txt
-      - name: Read /branch-name.txt
+          path: ./branch-name.txt
+      - name: Read ./branch-name.txt
         id: branch-name
         uses: juliangruber/read-file-action@v1
         with:
-          path: /branch-name.txt
+          path: ./branch-name.txt
+      - run: rm ./branch-name.txt
       - uses: actions/checkout@v2
         with:
           ref: ${{steps.branch-name.outputs.content}}
@@ -128,12 +131,13 @@ jobs:
       - uses: actions/download-artifact@v1
         with:
           name: branch-name
-          path: /branch-name.txt
-      - name: Read /branch-name.txt
+          path: ./branch-name.txt
+      - name: Read ./branch-name.txt
         id: branch-name
         uses: juliangruber/read-file-action@v1
         with:
-          path: /branch-name.txt
+          path: ./branch-name.txt
+      - run: rm ./branch-name.txt
       - uses: actions/checkout@v2
         with:
           ref: ${{steps.branch-name.outputs.content}}
