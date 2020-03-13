@@ -45,7 +45,7 @@ jobs:
       - uses: actions/download-artifact@v1
         with:
           name: branch-name
-          path: ./branch-name.txt
+          path: ./
       - run: cat ./branch-name.txt
         id: branch-name
       - run: rm ./branch-name.txt
@@ -71,7 +71,7 @@ jobs:
       - uses: actions/download-artifact@v1
         with:
           name: branch-name
-          path: ./branch-name.txt
+          path: ./
       - run: cat ./branch-name.txt
         id: branch-name
       - run: rm ./branch-name.txt
@@ -95,7 +95,7 @@ jobs:
       - uses: actions/download-artifact@v1
         with:
           name: branch-name
-          path: ./branch-name.txt
+          path: ./
       - run: cat ./branch-name.txt
         id: branch-name
       - run: rm ./branch-name.txt
@@ -122,7 +122,7 @@ jobs:
       - uses: actions/download-artifact@v1
         with:
           name: branch-name
-          path: ./branch-name.txt
+          path: ./
       - run: cat ./branch-name.txt
         id: branch-name
       - run: rm ./branch-name.txt
