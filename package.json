@@ -1,10 +1,20 @@
 {
   "name": "gatest",
-  "version": "1.0.0",
+  "version": "1.1.1-beta.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "typedoc": "node node_modules/typedoc/bin/typedoc --options ./typedoc.json ./",
+    "release": "standard-version"
+  },
+  "dependencies": {
+    "detect-indent": "^6.0.0",
+    "detect-newline": "^3.1.0",
+    "standard-version": "^7.1.0",
+    "stringify-package": "^1.0.1",
+    "typedoc": "^0.15.4",
+    "typedoc-plugin-external-module-map": "^1.0.0"
   },
   "repository": {
     "type": "git",

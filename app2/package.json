@@ -1,16 +1,16 @@
 {
   "name": "gatest-app2",
-  "version": "1.0.0",
+  "version": "1.1.1-beta.0",
   "description": "",
   "main": "dist/index",
   "scripts": {
     "start": "node dist/index",
-    "build": "cp -r ./src ./dist",
+    "build": "cp -r ./src ./dist && cp ./package.json ./dist/package.json",
     "test": "echo \"Error: no test specified\""
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "gatest-app1": "1.0.0"
+    "gatest-app1": "1.1.1-beta.0"
   }
 }

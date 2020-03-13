@@ -1,0 +1,247 @@
+# This workflow will run tests using node and then publish a package to GitHub Packages when a release is created
+# For more information see: https://help.github.com/actions/language-and-framework-guides/publishing-nodejs-packages
+
+name: Create release branch
+
+on:
+  milestone:
+    types: [closed]
+
+jobs:
+  create-release-branch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - run: git branch release
+      - run: git checkout release
+      - run: npm i
+      - run: npm run typedoc
+      - run: |
+          git config --global user.email "you@example.com"
+          git config --global user.name "CI"
+      - run: |
+          git add docs/*
+          git commit -m "docs(*): regenerate type documentation"
+      - run: npm run release -- --skip.tag --skip.commit --skip.changelog
+      - name: Extract version
+        id: extract_version
+        uses: Saionaro/extract-package-version@v1.0.6
+      - run: echo release/${{steps.extract_version.outputs.version}} > ./branch-name.txt
+      - uses: actions/upload-artifact@v1
+        with:
+          name: branch-name
+          path: ./branch-name.txt
+      - run: git reset HEAD --hard
+      - run: git push -u origin release:release/${{ steps.extract_version.outputs.version }}
+
+  open-pull-requests:
+    runs-on: ubuntu-latest
+    needs: create-release-branch
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/download-artifact@v1
+        with:
+          name: branch-name
+          path: ./
+      - run: echo "##[set-output name=branch-name;]$(cat ./branch-name.txt)"
+        id: branch-name
+      - run: rm ./branch-name.txt
+      - name: pull-request
+        uses: repo-sync/pull-request@v2
+        with:
+          source_branch: ${{ steps.branch-name.outputs.branch-name }}
+          destination_branch: "master"
+          pr_title: "release: ${{ steps.branch-name.outputs.branch-name }} -> master"
+          pr_body: "${{ steps.branch-name.outputs.branch-name }}"
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+      - name: pull-request
+        uses: repo-sync/pull-request@v2
+        with:
+          source_branch: ${{ steps.branch-name.outputs.branch-name }}
+          destination_branch: "develop"
+          pr_title: "release: ${{ steps.branch-name.outputs.branch-name }} -> develop"
+          pr_body: "${{ steps.branch-name.outputs.branch-name }}"
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+
+  update-version:
+    runs-on: ubuntu-latest
+    needs: create-release-branch
+    steps:
+      - uses: actions/download-artifact@v1
+        with:
+          name: branch-name
+          path: ./
+      - run: echo "##[set-output name=branch-name;]$(cat ./branch-name.txt)"
+        id: branch-name
+      - run: rm ./branch-name.txt
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{steps.branch-name.outputs.branch-name}}
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - run: npm i
+      - run: |
+          git config --global user.email "you@example.com"
+          git config --global user.name "CI"
+      - run: npm run release -- --prerelease beta --skip.changelog
+      - run: git push
+
+  build-app1:
+    needs: update-version
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v1
+        with:
+          name: branch-name
+          path: ./
+      - run: echo "##[set-output name=branch-name;]$(cat ./branch-name.txt)"
+        id: branch-name
+      - run: rm ./branch-name.txt
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{steps.branch-name.outputs.branch-name}}
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - run: npm i
+        working-directory: ./app1
+      - run: npm run build
+        working-directory: ./app1
+      - uses: actions/upload-artifact@v1
+        with:
+          name: app1-build
+          path: ./app1/dist
+
+  build-app2:
+    needs: publish-npm-app1
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/download-artifact@v1
+        with:
+          name: branch-name
+          path: ./
+      - run: echo "##[set-output name=branch-name;]$(cat ./branch-name.txt)"
+        id: branch-name
+      - run: rm ./branch-name.txt
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{steps.branch-name.outputs.branch-name}}
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+      - run: npm run build
+        working-directory: ./app2
+      - uses: actions/upload-artifact@v1
+        with:
+          name: app2-build
+          path: ./app2/dist
+
+  publish-npm-app1:
+    needs: build-app1
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+          registry-url: https://registry.npmjs.org/
+      - uses: actions/download-artifact@v1
+        with:
+          name: app1-build
+          path: ./app1
+      - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
+        working-directory: ./app1
+
+  publish-gpr-app1:
+    needs: build-app1
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+          registry-url: https://npm.pkg.github.com/
+          scope: "@michaRedM"
+      - uses: actions/download-artifact@v1
+        with:
+          name: app1-build
+          path: ./app1
+      - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        working-directory: ./app1
+
+  publish-npm-app2:
+    needs: build-app2
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+          registry-url: https://registry.npmjs.org/
+      - uses: actions/download-artifact@v1
+        with:
+          name: app2-build
+          path: ./app2
+      - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
+        working-directory: ./app2
+
+  publish-gpr-app2:
+    needs: build-app2
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+          registry-url: https://npm.pkg.github.com/
+          scope: "@michaRedM"
+      - uses: actions/download-artifact@v1
+        with:
+          name: app2-build
+          path: ./app2
+      - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        working-directory: ./app2
+
+  publish-npm-app3:
+    needs: build-app2
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+          registry-url: https://registry.npmjs.org/
+      - uses: actions/download-artifact@v1
+        with:
+          name: app2-build
+          path: ./app2
+      - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
+        working-directory: ./app2
+
+  publish-gpr-app3:
+    needs: build-app2
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+          registry-url: https://npm.pkg.github.com/
+          scope: "@michaRedM"
+      - uses: actions/download-artifact@v1
+        with:
+          name: app2-build
+          path: ./app2
+      - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        working-directory: ./app2
