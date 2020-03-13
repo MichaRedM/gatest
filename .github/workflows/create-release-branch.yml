@@ -24,7 +24,7 @@ jobs:
           git config --global user.name "CI"
       - run: |
           git add docs/*
-          git commit -m "docs(*): regenerate type documentation"
+          git commit -m "docs(*): regenerate type documentation" || true
       - run: npm run release -- --skip.tag --skip.commit --skip.changelog
       - name: Extract version
         id: extract_version
