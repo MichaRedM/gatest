@@ -3,10 +3,10 @@
 
 name: Node.js Package
 
+
 on:
-  push:
-    branches: 
-      - release
+  milestone:
+    types: [closed]
 
 jobs:
   update-branch:
@@ -16,6 +16,8 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 12
+      - run: git branch release
+      - run: git checkout release
       - run: npm i
       - run: npm run typedoc
       - run: |
@@ -23,8 +25,12 @@ jobs:
          git config --global user.email "you@example.com"
          git config --global user.name "CI"
          git commit -m "docs(*): regenerate type documentation"
-      - run: npm run release -- --skip.tag
-      - run: git push
+      - run: npm run release -- --skip.tag --skip.commit --skip.changelog
+      - name: Extract version
+        id: extract_version
+        uses: Saionaro/extract-package-version@v1.0.6
+      - run: git reset HEAD --hard
+      - run: git push -u origin release:release/${{ steps.extract_version.outputs.version }}
 #   build:
 #     runs-on: ubuntu-latest
 #     steps:
