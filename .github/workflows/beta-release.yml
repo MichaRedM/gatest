@@ -79,8 +79,8 @@ jobs:
         with:
           node-version: 12
           registry-url: https://npm.pkg.github.com/
-          scope: '@your-github-username'
-       - uses: actions/download-artifact@v1
+          scope: '@michaRedM'
+      - uses: actions/download-artifact@v1
         with:
           name: app1-build
           path: ./app1
@@ -114,8 +114,8 @@ jobs:
         with:
           node-version: 12
           registry-url: https://npm.pkg.github.com/
-          scope: '@your-github-username'
-       - uses: actions/download-artifact@v1
+          scope: '@michaRedM'
+      - uses: actions/download-artifact@v1
         with:
           name: app2-build
           path: ./app2
@@ -149,8 +149,8 @@ jobs:
         with:
           node-version: 12
           registry-url: https://npm.pkg.github.com/
-          scope: '@your-github-username'
-       - uses: actions/download-artifact@v1
+          scope: '@michaRedM'
+      - uses: actions/download-artifact@v1
         with:
           name: app2-build
           path: ./app2
