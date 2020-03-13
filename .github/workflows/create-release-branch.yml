@@ -46,25 +46,22 @@ jobs:
         with:
           name: branch-name
           path: ./branch-name.txt
-      - name: Read ./branch-name.txt
+      - run: cat ./branch-name.txt
         id: branch-name
-        uses: juliangruber/read-file-action@v1
-        with:
-          path: ./branch-name.txt
       - run: rm ./branch-name.txt
       - name: pull-request
         uses: repo-sync/pull-request@v2
         with:
           destination_branch: "master"
-          pr_title: "release: ${{ steps.branch-name.outputs.content }} -> master"
-          pr_body: "${{ steps.branch-name.outputs.content }}"
+          pr_title: "release: ${{ steps.branch-name.outputs }} -> master"
+          pr_body: "${{ steps.branch-name.outputs }}"
           github_token: ${{ secrets.GITHUB_TOKEN }}
       - name: pull-request
         uses: repo-sync/pull-request@v2
         with:
           destination_branch: "develop"
-          pr_title: "release: ${{ steps.branch-name.outputs.content }} -> develop"
-          pr_body: "${{ steps.branch-name.outputs.content }}"
+          pr_title: "release: ${{ steps.branch-name.outputs }} -> develop"
+          pr_body: "${{ steps.branch-name.outputs }}"
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
   update-version:
@@ -75,15 +72,12 @@ jobs:
         with:
           name: branch-name
           path: ./branch-name.txt
-      - name: Read ./branch-name.txt
+      - run: cat ./branch-name.txt
         id: branch-name
-        uses: juliangruber/read-file-action@v1
-        with:
-          path: ./branch-name.txt
       - run: rm ./branch-name.txt
       - uses: actions/checkout@v2
         with:
-          ref: ${{steps.branch-name.outputs.content}}
+          ref: ${{steps.branch-name.outputs}}
       - uses: actions/setup-node@v1
         with:
           node-version: 12
@@ -102,15 +96,12 @@ jobs:
         with:
           name: branch-name
           path: ./branch-name.txt
-      - name: Read ./branch-name.txt
+      - run: cat ./branch-name.txt
         id: branch-name
-        uses: juliangruber/read-file-action@v1
-        with:
-          path: ./branch-name.txt
       - run: rm ./branch-name.txt
       - uses: actions/checkout@v2
         with:
-          ref: ${{steps.branch-name.outputs.content}}
+          ref: ${{steps.branch-name.outputs}}
       - uses: actions/setup-node@v1
         with:
           node-version: 12
@@ -132,15 +123,12 @@ jobs:
         with:
           name: branch-name
           path: ./branch-name.txt
-      - name: Read ./branch-name.txt
+      - run: cat ./branch-name.txt
         id: branch-name
-        uses: juliangruber/read-file-action@v1
-        with:
-          path: ./branch-name.txt
       - run: rm ./branch-name.txt
       - uses: actions/checkout@v2
         with:
-          ref: ${{steps.branch-name.outputs.content}}
+          ref: ${{steps.branch-name.outputs}}
       - uses: actions/setup-node@v1
         with:
           node-version: 12
