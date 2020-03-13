@@ -7,7 +7,7 @@ name: beta-release
 on:
   push:
     branches:
-      - release/**
+      - 'release/**'
 
 jobs:
   update-version:
