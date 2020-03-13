@@ -1,7 +1,7 @@
 # This workflow will run tests using node and then publish a package to GitHub Packages when a release is created
 # For more information see: https://help.github.com/actions/language-and-framework-guides/publishing-nodejs-packages
 
-name: Node.js Package
+name: Create release branch
 
 on:
   milestone:
@@ -46,7 +46,7 @@ jobs:
         with:
           name: branch-name
           path: ./
-      - run: echo "##[set-output name=branch-name;] $(cat ./branch-name.txt)"
+      - run: echo "##[set-output name=branch-name;]$(cat ./branch-name.txt)"
         id: branch-name
       - run: rm ./branch-name.txt
       - name: pull-request
@@ -74,7 +74,7 @@ jobs:
         with:
           name: branch-name
           path: ./
-      - run: echo "##[set-output name=branch-name;] $(cat ./branch-name.txt)"
+      - run: echo "##[set-output name=branch-name;]$(cat ./branch-name.txt)"
         id: branch-name
       - run: rm ./branch-name.txt
       - uses: actions/checkout@v2
@@ -87,7 +87,7 @@ jobs:
       - run: |
           git config --global user.email "you@example.com"
           git config --global user.name "CI"
-      - run: npm run release -- --prerelease --skip.changelog
+      - run: npm run release -- --prerelease beta --skip.changelog
       - run: git push
 
   build-app1:
@@ -98,7 +98,7 @@ jobs:
         with:
           name: branch-name
           path: ./
-      - run: echo "##[set-output name=branch-name;] $(cat ./branch-name.txt)"
+      - run: echo "##[set-output name=branch-name;]$(cat ./branch-name.txt)"
         id: branch-name
       - run: rm ./branch-name.txt
       - uses: actions/checkout@v2
@@ -125,7 +125,7 @@ jobs:
         with:
           name: branch-name
           path: ./
-      - run: echo "##[set-output name=branch-name;] $(cat ./branch-name.txt)"
+      - run: echo "##[set-output name=branch-name;]$(cat ./branch-name.txt)"
         id: branch-name
       - run: rm ./branch-name.txt
       - uses: actions/checkout@v2
