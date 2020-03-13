@@ -7,7 +7,7 @@ name: beta-release
 on:
   push:
     branches:
-      - release/**
+      - 'release/**'
 
 jobs:
   update-version:
@@ -29,6 +29,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+      with:
+        ref: ${{github.ref}}
     - uses: actions/setup-node@v1
       with:
         node-version: 12
@@ -47,6 +49,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+      with:
+        ref: ${{github.ref}}
     - uses: actions/setup-node@v1
       with:
         node-version: 12
@@ -56,6 +60,24 @@ jobs:
       with:
         name: app2-build
         path: ./app2/dist
+
+  build-app3:
+    needs: publish-npm-app1
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        ref: ${{github.ref}}
+    - uses: actions/setup-node@v1
+      with:
+        node-version: 12
+    - run: npm run build
+      working-directory: ./app3
+    - uses: actions/upload-artifact@v1
+      with:
+        name: app3-build
+        path: ./app3/dist
 
   publish-npm-app1:
     needs: build-app1
@@ -91,7 +113,7 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
         working-directory: ./app1
-    
+
   publish-npm-app2:
     needs: build-app2
     runs-on: ubuntu-latest
@@ -126,9 +148,9 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
         working-directory: ./app2
-    
+
   publish-npm-app3:
-    needs: build-app2
+    needs: build-app3
     runs-on: ubuntu-latest
     steps:
       - uses: actions/setup-node@v1
@@ -137,15 +159,15 @@ jobs:
           registry-url: https://registry.npmjs.org/
       - uses: actions/download-artifact@v1
         with:
-          name: app2-build
-          path: ./app2
+          name: app3-build
+          path: ./app3
       - run: npm publish --tag beta
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
-        working-directory: ./app2
+        working-directory: ./app3
 
   publish-gpr-app3:
-    needs: build-app2
+    needs: build-app3
     runs-on: ubuntu-latest
     steps:
       - uses: actions/setup-node@v1
@@ -155,10 +177,10 @@ jobs:
           scope: '@michaRedM'
       - uses: actions/download-artifact@v1
         with:
-          name: app2-build
-          path: ./app2
+          name: app3-build
+          path: ./app3
       - run: npm publish --tag beta
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
-        working-directory: ./app2
+        working-directory: ./app3
 
