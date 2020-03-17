@@ -1,31 +1,17 @@
 # This workflow will run tests using node and then publish a package to GitHub Packages when a release is created
 # For more information see: https://help.github.com/actions/language-and-framework-guides/publishing-nodejs-packages
 
-name: beta-release
+name: release
 
 
 on:
   push:
     branches:
-      - 'release/**'
+      - master
 
 jobs:
-  update-version:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 12
-      - run: |
-          git config --global user.email "you@example.com"
-          git config --global user.name "CI"
-      - run: npm i
-      - run: npm run release -- --prerelease beta --skip.changelog
-      - run: git push
 
   build-app1:
-    needs: update-version
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
