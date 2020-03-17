@@ -22,7 +22,7 @@ jobs:
           git config --global user.name "CI"
       - run: npm i
       - run: npm run release -- --prerelease rc --skip.changelog
-      - run: git push
+      - run: git push origin --tags
 
   build-app1:
     needs: update-version
