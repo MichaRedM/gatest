@@ -17,7 +17,7 @@ jobs:
           node-version: 12
       - run: git branch release
       - run: git checkout release
-      - run: git fetch --tags
+      - run: git fetch
       - run: npm i
       - run: npm run typedoc
       - run: |
@@ -55,7 +55,7 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 12
-      - run: git fetch --tags
+      - run: git fetch
       - run: npm i
       - run: |
           git config --global user.email "you@example.com"
