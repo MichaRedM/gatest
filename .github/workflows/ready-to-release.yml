@@ -29,4 +29,6 @@ jobs:
           git config --global user.email "you@example.com"
           git config --global user.name "CI"
       - run: npm run release
-      - run: git push origin --all
+      - run: |
+          git push
+          git push origin --tags
