@@ -1,7 +1,7 @@
 # This workflow will run tests using node and then publish a package to GitHub Packages when a release is created
 # For more information see: https://help.github.com/actions/language-and-framework-guides/publishing-nodejs-packages
 
-name: beta-release
+name: rc-release
 
 
 on:
@@ -21,8 +21,8 @@ jobs:
           git config --global user.email "you@example.com"
           git config --global user.name "CI"
       - run: npm i
-      - run: npm run release -- --prerelease beta --skip.changelog
-      - run: git push
+      - run: npm run release -- --prerelease rc --skip.changelog
+      - run: git push origin --all
 
   build-app1:
     needs: update-version
@@ -91,7 +91,7 @@ jobs:
         with:
           name: app1-build
           path: ./app1
-      - run: npm publish --tag beta
+      - run: npm publish --tag rc
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
         working-directory: ./app1
@@ -109,7 +109,7 @@ jobs:
         with:
           name: app1-build
           path: ./app1
-      - run: npm publish --tag beta
+      - run: npm publish --tag rc
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
         working-directory: ./app1
@@ -126,7 +126,7 @@ jobs:
         with:
           name: app2-build
           path: ./app2
-      - run: npm publish --tag beta
+      - run: npm publish --tag rc
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
         working-directory: ./app2
@@ -144,7 +144,7 @@ jobs:
         with:
           name: app2-build
           path: ./app2
-      - run: npm publish --tag beta
+      - run: npm publish --tag rc
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
         working-directory: ./app2
@@ -161,7 +161,7 @@ jobs:
         with:
           name: app3-build
           path: ./app3
-      - run: npm publish --tag beta
+      - run: npm publish --tag rc
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
         working-directory: ./app3
@@ -179,7 +179,7 @@ jobs:
         with:
           name: app3-build
           path: ./app3
-      - run: npm publish --tag beta
+      - run: npm publish --tag rc
         env:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
         working-directory: ./app3
