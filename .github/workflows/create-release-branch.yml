@@ -58,8 +58,8 @@ jobs:
       - run: |
           git config --global user.email "you@example.com"
           git config --global user.name "CI"
-      - run: npm run release -- --prerelease beta --skip.changelog
-      - run: git push
+      - run: npm run release -- --prerelease rc --skip.changelog
+      - run: git push origin --all
 
   open-pull-requests:
     runs-on: ubuntu-latest
