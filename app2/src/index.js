@@ -1,3 +1,3 @@
 console.log('Hello from app2');
 
-let a = require('gatest-app1');
+let b = require('gatest-app1');
