@@ -54,6 +54,7 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 12
+      - run: git fetch --tags
       - run: npm i
       - run: |
           git config --global user.email "you@example.com"
