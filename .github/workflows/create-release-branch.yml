@@ -79,7 +79,7 @@ jobs:
           source_branch: ${{ steps.branch-name.outputs.branch-name }}
           destination_branch: "master"
           pr_title: "release: ${{ steps.branch-name.outputs.branch-name }} -> master"
-          pr_body: "${{ steps.branch-name.outputs.branch-name }}"
+          pr_body: "${{ steps.branch-name.outputs.branch-name }} \n\n To finalize release add the 'ready-to-deploy' label and merge the -> master and -> develop pull-requests"
           github_token: ${{ secrets.GITHUB_TOKEN }}
       - name: pull-request
         uses: repo-sync/pull-request@v2
