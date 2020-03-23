@@ -1,9 +1,9 @@
 const fs = require('fs');
 const path = process.env['CHANGELOG_PATH'] || './CHANGELOG.md';
 const version = process.env['VERSION'];
+const prefix = process.env['PREFIX'] || '';
 
 const changelogLines = fs.readFileSync(path).toString().split('\n');
-console.log(changelogLines.join('\n'));
 let result = [];
 
 let logRegionStarted = false;
@@ -30,4 +30,4 @@ for (let i = 0; i < changelogLines.length; i++) {
     }
 }
 console.log('# Changelog for version ' + version + '  \n');
-console.log(result.join('\n'));
+console.log(result.map(x => prefix + x).join('\n'));
