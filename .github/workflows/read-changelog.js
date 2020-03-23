@@ -29,5 +29,5 @@ for (let i = 0; i < changelogLines.length; i++) {
         result.push(changelogLines[i]);
     }
 }
-
+console.log('# Changelog for version ' + version + '  \n');
 console.log(result.join('\n'));
