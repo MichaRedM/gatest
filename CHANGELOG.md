@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 3.1.0-rc.3 (2020-03-23)
+
+
+### Bug Fixes
+
+* **ci:** read changelog ([075d5ca](https://github.com/MichaRedM/gatest/commit/075d5cad87ee0fd432138a8857801dd9dff212d8))
+
 ## 3.1.0-rc.2 (2020-03-23)
 
 
