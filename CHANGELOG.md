@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 3.1.0-rc.9 (2020-03-23)
+
+
+### Features
+
+* **ci:** changelog blub ([3f259f7](https://github.com/MichaRedM/gatest/commit/3f259f7414af8fd0743ca93ae9fe77e84ce670b0))
+
 ## 3.1.0-rc.8 (2020-03-23)
 
 
