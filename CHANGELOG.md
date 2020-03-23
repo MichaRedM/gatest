@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 3.0.0-rc.3 (2020-03-23)
+
+
+### Bug Fixes
+
+* **ci:** flooo release fix ([6d3cd6f](https://github.com/MichaRedM/gatest/commit/6d3cd6f3f3acb0e797a52e7eead9c62e842d42f4))
+
 ## 3.0.0-rc.2 (2020-03-23)
 
 
