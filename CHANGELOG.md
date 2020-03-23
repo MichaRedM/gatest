@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 3.4.0-rc.0 (2020-03-23)
+
+
+### Features
+
+* **app2:** add a ([71dc209](https://github.com/MichaRedM/gatest/commit/71dc2091f8c9de77bcaed76c7e8e267e96e1f1e7))
+
 ## [3.3.0](https://github.com/MichaRedM/gatest/compare/v3.3.0-rc.0...v3.3.0) (2020-03-23)
 
 ## 3.3.0-rc.0 (2020-03-23)
