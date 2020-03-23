@@ -1,6 +1,6 @@
 {
   "name": "gatest",
-  "version": "3.2.1-rc.0",
+  "version": "3.2.1",
   "description": "",
   "main": "index.js",
   "scripts": {
