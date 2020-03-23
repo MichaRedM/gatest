@@ -1,8 +1,12 @@
 const fs = require('fs');
 const path = process.env['CHANGELOG_PATH'] || './CHANGELOG.md';
-const version = process.env['VERSION'];
+let version = process.env['VERSION'];
 
-console.log('generating changelog for version '+ version)
+if(version.startsWith('v')) {
+    version = version.substring(1);
+}
+
+console.log('generating changelog for version "'+ version + '"');
 
 const changelogLines = fs.readFileSync(path).toString().split('\n');
 let result = [];
