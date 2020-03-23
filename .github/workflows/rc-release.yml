@@ -230,7 +230,7 @@ jobs:
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
-          body_path: ${{ github.workflow }}-CHANGELOG.txt
+          body_path: CHANGELOG.md
           prerelease: "true"
           tag_name: ${{steps.tag-name.outputs.tag}}
           files: |
