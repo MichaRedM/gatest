@@ -216,7 +216,7 @@ jobs:
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
-          body: ${{ steps.changelog_reader.outputs.log_entry }}
+          body: "${{ steps.changelog_reader.outputs.log_entry }}"
           tag_name: ${{steps.tag-name.outputs.tag}}
           prerelease: "false"
           files: |
