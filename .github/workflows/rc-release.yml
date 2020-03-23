@@ -232,10 +232,10 @@ jobs:
         with:
           body_path: ${{ github.workflow }}-CHANGELOG.txt
           prerelease: "true"
+          tag_name: ${{steps.tag-name.outputs.tag}}
           files: |
             app1-build.zip
             app2-build.zip
             app3-build.zip
-          tag_name: ${{steps.tag-name.outputs.tag}}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
