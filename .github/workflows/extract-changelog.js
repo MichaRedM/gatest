@@ -29,4 +29,5 @@ for (let i = 0; i < changelogLines.length; i++) {
         result.push(changelogLines[i]);
     }
 }
-fs.writeFileSync(path, result.join('\n'))
+console.log(result.join('\n'));
+fs.writeFileSync(path, result.join('\n'));
