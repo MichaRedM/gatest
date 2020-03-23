@@ -3,7 +3,7 @@ const path = process.env['CHANGELOG_PATH'] || './CHANGELOG.md';
 const version = process.env['VERSION'];
 
 const changelogLines = fs.readFileSync(path).toString().split('\n');
-
+console.log(changelogLines.join('\n'));
 let result = [];
 
 let logRegionStarted = false;
