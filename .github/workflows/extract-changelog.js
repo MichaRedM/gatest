@@ -14,9 +14,10 @@ for (let i = 0; i < changelogLines.length; i++) {
         logRegionStarted = true;
     } else if (changelogLines[i].startsWith('### ' + version) || changelogLines[i].startsWith('### [' + version)) {
         logRegionStarted = true;
-    } else if (changelogLines[i].startsWith('## ')) {
+    } else if (logRegionStarted && changelogLines[i].startsWith('## ')) {
         break;
     } else if (
+        logRegionStarted &&
         changelogLines[i].startsWith('### ') &&
         changelogLines[i].indexOf('Bug Fixes') === -1 &&
         changelogLines[i].indexOf('Features') === -1 &&
@@ -28,5 +29,4 @@ for (let i = 0; i < changelogLines.length; i++) {
         result.push(changelogLines[i]);
     }
 }
-
 fs.writeFileSync(path, result.join('\n'))
