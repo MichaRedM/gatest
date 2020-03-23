@@ -227,15 +227,18 @@ jobs:
       - run: git fetch
       - run: echo "##[set-output name=tag;]$(git tag --points-at HEAD)"
         id: tag-name #${{steps.tag-name.outputs.tag}}
+      - name: Get Changelog Entry
+        id: changelog_reader
+        uses: mindsers/changelog-reader-action@v1.1.0
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
-          body_path: CHANGELOG.md
+          body: ${{ steps.changelog_reader.outputs.log_entry }}
           prerelease: "true"
           tag_name: ${{steps.tag-name.outputs.tag}}
           files: |
-            app1-build.zip
-            app2-build.zip
-            app3-build.zip
+            release-app1.zip
+            release-app2.zip
+            release-app3.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
