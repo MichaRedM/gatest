@@ -317,15 +317,14 @@ jobs:
       - run: git fetch
       - run: echo "##[set-output name=tag;]$(git tag --points-at HEAD)"
         id: tag-name #${{steps.tag-name.outputs.tag}}
-      - run: node ./.github/workflows/read-changelog.js
+      - run: node ./.github/workflows/extract-changelog.js
         id: changelog-entry
         env:
           VERSION: ${{steps.tag-name.outputs.tag}}
-          PREFIX: '##[set-output name=log;]'
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
-          body: "${{ steps.changelog-entry.outputs.log }}"
+          body_path: "./CHANGELOG.md"
           prerelease: "true"
           tag_name: ${{steps.tag-name.outputs.tag}}
           files: |

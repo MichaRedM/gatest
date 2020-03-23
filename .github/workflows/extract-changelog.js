@@ -1,7 +1,8 @@
 const fs = require('fs');
 const path = process.env['CHANGELOG_PATH'] || './CHANGELOG.md';
 const version = process.env['VERSION'];
-const prefix = process.env['PREFIX'] || '';
+
+console.log('generating changelog for version '+ version)
 
 const changelogLines = fs.readFileSync(path).toString().split('\n');
 let result = [];
@@ -10,11 +11,10 @@ let logRegionStarted = false;
 
 for (let i = 0; i < changelogLines.length; i++) {
     if (changelogLines[i].startsWith('## ' + version) || changelogLines[i].startsWith('## [' + version)) {
-        logRegionStarted = 'Major';
+        logRegionStarted = true;
     } else if (changelogLines[i].startsWith('### ' + version) || changelogLines[i].startsWith('### [' + version)) {
-        logRegionStarted = 'Minor';
+        logRegionStarted = true;
     } else if (changelogLines[i].startsWith('## ')) {
-        logRegionStarted = false;
         break;
     } else if (
         changelogLines[i].startsWith('### ') &&
@@ -22,12 +22,11 @@ for (let i = 0; i < changelogLines.length; i++) {
         changelogLines[i].indexOf('Features') === -1 &&
         changelogLines[i].indexOf('BREAKING CHANGES') === -1
     ) {
-        logRegionStarted = false;
         break;
     }
     if (logRegionStarted) {
         result.push(changelogLines[i]);
     }
 }
-console.log('# Changelog for version ' + version + '  \n');
-console.log(result.map(x => prefix + x).join('\n'));
+
+fs.writeFileSync(path, result.join('\n'))
