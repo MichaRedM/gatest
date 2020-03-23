@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 3.1.0-rc.4 (2020-03-23)
+
+
+### Bug Fixes
+
+* **ci:** is the bory wörking? ([4f2ab7b](https://github.com/MichaRedM/gatest/commit/4f2ab7b0bf5cf8c0f1486ea7681af08e2879ede1))
+
 ## 3.1.0-rc.3 (2020-03-23)
 
 
