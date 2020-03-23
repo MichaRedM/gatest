@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 3.1.0-rc.11 (2020-03-23)
+
+
+### Bug Fixes
+
+* **ci:** asdf ([fedc53d](https://github.com/MichaRedM/gatest/commit/fedc53dcd800e02dec2c27d92c51e4ae61aec6dc))
+
 ## 3.1.0-rc.10 (2020-03-23)
 
 
