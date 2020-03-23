@@ -170,3 +170,54 @@ jobs:
           NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
         working-directory: ./app3
 
+  github-release:
+    needs: 
+      - publish-npm-app1
+      - publish-npm-app2
+      - publish-npm-app3
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{github.ref}}
+      - uses: actions/download-artifact@v1
+        with:
+          name: app1-build
+          path: ./app1
+      - uses: actions/download-artifact@v1
+        with:
+          name: app2-build
+          path: ./app2
+      - uses: actions/download-artifact@v1
+        with:
+          name: app3-build
+          path: ./app3
+      - name: Zip app1
+        uses: thedoctor0/zip-release@master
+        with:
+          filename: 'release-app1.zip'
+          path: ./app1
+      - name: Zip app2
+        uses: thedoctor0/zip-release@master
+        with:
+          filename: 'release-app2.zip'
+          path: ./app2
+      - name: Zip app3
+        uses: thedoctor0/zip-release@master
+        with:
+          filename: 'release-app3.zip'
+          path: ./app3
+      - name: Create Github-Release
+        uses: docker://antonyurchenko/git-release:latest
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DRAFT_RELEASE: "false"
+          PRE_RELEASE: "false"
+          CHANGELOG_FILE: "CHANGELOG.md"
+          ALLOW_EMPTY_CHANGELOG: "true"
+          ALLOW_TAG_PREFIX: "true"
+        with:
+          args: |
+              release-app1.zip
+              release-app2.zip
+              release-app3.zip
