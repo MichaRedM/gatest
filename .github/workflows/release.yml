@@ -207,17 +207,36 @@ jobs:
         with:
           filename: 'release-app3.zip'
           path: ./app3
+      - run: echo "##[set-output name=tag;]$(git tag --points-at HEAD)"
+        id: tag-name #${{steps.tag-name.outputs.tag}}
       - name: Create Github-Release
-        uses: docker://antonyurchenko/git-release:latest
+        uses: K-Phoen/semver-release-action@master
+        with:
+          created_tag: ${{steps.tag-name.outputs.tag}}
+          prerelease_regex: .*-.*
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          DRAFT_RELEASE: "false"
-          PRE_RELEASE: "false"
-          CHANGELOG_FILE: "CHANGELOG.md"
-          ALLOW_EMPTY_CHANGELOG: "true"
-          ALLOW_TAG_PREFIX: "true"
+      - name: Upload app1 build to release
+        uses: svenstaro/upload-release-action@v1-release
         with:
-          args: |
-              release-app1.zip
-              release-app2.zip
-              release-app3.zip
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: release-app1.zip
+          asset_name: app1-build
+          tag: ${{steps.tag-name.outputs.tag}}
+          overwrite: "true"
+      - name: Upload app2 build to release
+        uses: svenstaro/upload-release-action@v1-release
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: release-app2.zip
+          asset_name: app2-build
+          tag: ${{steps.tag-name.outputs.tag}}
+          overwrite: "true"
+      - name: Upload app3 build to release
+        uses: svenstaro/upload-release-action@v1-release
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: release-app3.zip
+          asset_name: app3-build
+          tag: ${{steps.tag-name.outputs.tag}}
+          overwrite: "true"
