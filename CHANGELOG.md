@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 3.1.0-rc.5 (2020-03-23)
+
+
+### Features
+
+* **ci:** lol ([c05063f](https://github.com/MichaRedM/gatest/commit/c05063f824d95b8cc4564efafa1c42513fb5ee24))
+
 ## 3.1.0-rc.4 (2020-03-23)
 
 
