@@ -22,7 +22,7 @@ jobs:
           git config --global user.name "CI"
           git fetch
       - run: npm i
-      - run: npm run release -- --prerelease rc --skip.changelog
+      - run: npm run release -- --prerelease rc
       - run: |
           git push
           git push origin --tags
