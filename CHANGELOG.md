@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 3.3.0-rc.0 (2020-03-23)
+
+
+### Features
+
+* **ci:** fetchdepth ([c7151eb](https://github.com/MichaRedM/gatest/commit/c7151ebd528616e6d8be018155140c73e363682e))
+
 ### [3.2.1](https://github.com/MichaRedM/gatest/compare/v3.2.1-rc.0...v3.2.1) (2020-03-23)
 
 ### 3.2.1-rc.0 (2020-03-23)
