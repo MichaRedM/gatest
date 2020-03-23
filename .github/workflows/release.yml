@@ -208,7 +208,7 @@ jobs:
           filename: 'release-app3.zip'
           path: ./build/app3
       - run: git fetch
-      - run: echo "##[set-output name=tag;]$(git tag --points-at HEAD)"
+      - run: echo "##[set-output name=tag;]$(git tag --points-at $(git log --skip=1 -1 --format=%H))"
         id: tag-name #${{steps.tag-name.outputs.tag}}
       - run: node ./.github/workflows/extract-changelog.js
         id: changelog-entry
