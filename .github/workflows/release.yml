@@ -210,13 +210,14 @@ jobs:
       - run: git fetch
       - run: echo "##[set-output name=tag;]$(git tag --points-at HEAD)"
         id: tag-name #${{steps.tag-name.outputs.tag}}
-      - name: Get Changelog Entry
-        id: changelog_reader
-        uses: mindsers/changelog-reader-action@v1.1.0
+      - run: echo "##[set-output name=log;]$(node ./.github/workflows/read-changelog.js)"
+        id: changelog-entry
+        env:
+          VERSION: ${{steps.tag-name.outputs.tag}}
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
-          body: "${{ steps.changelog_reader.outputs.log_entry }}"
+          body: "${{ steps.changelog-entry.outputs.log }}"
           tag_name: ${{steps.tag-name.outputs.tag}}
           prerelease: "false"
           files: |
