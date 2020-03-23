@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 3.1.0-rc.8 (2020-03-23)
+
+
+### Bug Fixes
+
+* **ci:** wp ([33340f5](https://github.com/MichaRedM/gatest/commit/33340f5a2aef05664c343e4106efc338faead1c5))
+
 ## 3.1.0-rc.7 (2020-03-23)
 
 ## 3.1.0-rc.6 (2020-03-23)
