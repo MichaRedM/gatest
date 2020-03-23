@@ -200,30 +200,30 @@ jobs:
       - uses: actions/download-artifact@v1
         with:
           name: app1-build
-          path: ./app1
+          path: ./build/app1
       - uses: actions/download-artifact@v1
         with:
           name: app2-build
-          path: ./app2
+          path: ./build/app2
       - uses: actions/download-artifact@v1
         with:
           name: app3-build
-          path: ./app3
+          path: ./build/app3
       - name: Zip app1
         uses: thedoctor0/zip-release@master
         with:
           filename: 'release-app1.zip'
-          path: ./app1
+          path: ./build/app1
       - name: Zip app2
         uses: thedoctor0/zip-release@master
         with:
           filename: 'release-app2.zip'
-          path: ./app2
+          path: ./build/app2
       - name: Zip app3
         uses: thedoctor0/zip-release@master
         with:
           filename: 'release-app3.zip'
-          path: ./app3
+          path: ./build/app3
       - run: git fetch
       - run: echo "##[set-output name=tag;]$(git tag --points-at HEAD)"
         id: tag-name #${{steps.tag-name.outputs.tag}}
@@ -231,7 +231,7 @@ jobs:
         uses: K-Phoen/semver-release-action@master
         with:
           created_tag: ${{steps.tag-name.outputs.tag}}
-          prerelease_regex: .*-.*
+          prerelease_regex: v.*-rc.*
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Upload app1 build to release
@@ -239,7 +239,7 @@ jobs:
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: release-app1.zip
-          asset_name: app1-build
+          asset_name: app1-build.zip
           tag: ${{steps.tag-name.outputs.tag}}
           overwrite: "true"
       - name: Upload app2 build to release
@@ -247,7 +247,7 @@ jobs:
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: release-app2.zip
-          asset_name: app2-build
+          asset_name: app2-build.zip
           tag: ${{steps.tag-name.outputs.tag}}
           overwrite: "true"
       - name: Upload app3 build to release
@@ -255,6 +255,6 @@ jobs:
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: release-app3.zip
-          asset_name: app3-build
+          asset_name: app3-build.zip
           tag: ${{steps.tag-name.outputs.tag}}
           overwrite: "true"
