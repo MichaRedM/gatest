@@ -2,6 +2,94 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.1.0](https://github.com/MichaRedM/gatest/compare/v3.1.0-rc.12...v3.1.0) (2020-03-23)
+
+## 3.1.0-rc.12 (2020-03-23)
+
+
+### Bug Fixes
+
+* **ci:** remove v from version tag ([4cdee0a](https://github.com/MichaRedM/gatest/commit/4cdee0a4728c31db247a68c7b65541fc93b00ab3))
+
+## 3.1.0-rc.11 (2020-03-23)
+
+
+### Bug Fixes
+
+* **ci:** asdf ([fedc53d](https://github.com/MichaRedM/gatest/commit/fedc53dcd800e02dec2c27d92c51e4ae61aec6dc))
+
+## 3.1.0-rc.10 (2020-03-23)
+
+
+### Bug Fixes
+
+* **ci:** next fix :() ([3d9a188](https://github.com/MichaRedM/gatest/commit/3d9a1881cf4a6eab3cbbca4dd9e7956b6d124c76))
+
+## 3.1.0-rc.9 (2020-03-23)
+
+
+### Features
+
+* **ci:** changelog blub ([3f259f7](https://github.com/MichaRedM/gatest/commit/3f259f7414af8fd0743ca93ae9fe77e84ce670b0))
+
+## 3.1.0-rc.8 (2020-03-23)
+
+
+### Bug Fixes
+
+* **ci:** wp ([33340f5](https://github.com/MichaRedM/gatest/commit/33340f5a2aef05664c343e4106efc338faead1c5))
+
+## 3.1.0-rc.7 (2020-03-23)
+
+## 3.1.0-rc.6 (2020-03-23)
+
+
+### Bug Fixes
+
+* **ci:** write version in top of changelog ([05d31c6](https://github.com/MichaRedM/gatest/commit/05d31c6bd94a06dcfd8335404ff56a95c0d8bfd4))
+
+## 3.1.0-rc.5 (2020-03-23)
+
+
+### Features
+
+* **ci:** lol ([c05063f](https://github.com/MichaRedM/gatest/commit/c05063f824d95b8cc4564efafa1c42513fb5ee24))
+
+## 3.1.0-rc.4 (2020-03-23)
+
+
+### Bug Fixes
+
+* **ci:** is the bory wörking? ([4f2ab7b](https://github.com/MichaRedM/gatest/commit/4f2ab7b0bf5cf8c0f1486ea7681af08e2879ede1))
+
+## 3.1.0-rc.3 (2020-03-23)
+
+
+### Bug Fixes
+
+* **ci:** read changelog ([075d5ca](https://github.com/MichaRedM/gatest/commit/075d5cad87ee0fd432138a8857801dd9dff212d8))
+
+## 3.1.0-rc.2 (2020-03-23)
+
+
+### Bug Fixes
+
+* **ci:** changelog path ([4ddcf7a](https://github.com/MichaRedM/gatest/commit/4ddcf7a3ab5e5a63911e4665b6b1585142e85da1))
+
+## 3.1.0-rc.1 (2020-03-23)
+
+
+### Bug Fixes
+
+* **ci:** bla ([74bd2a8](https://github.com/MichaRedM/gatest/commit/74bd2a885b0642076929337a51d5ba277a789ff3))
+
+## 3.1.0-rc.0 (2020-03-23)
+
+
+### Features
+
+* **ci:** change relases plugin ([9bb567e](https://github.com/MichaRedM/gatest/commit/9bb567e9dbf04b4ce1791c017de84dcbba9708df))
+
 ## [3.0.0](https://github.com/MichaRedM/gatest/compare/v3.0.0-rc.3...v3.0.0) (2020-03-23)
 
 ## 3.0.0-rc.3 (2020-03-23)

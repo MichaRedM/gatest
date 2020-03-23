@@ -210,34 +210,19 @@ jobs:
       - run: git fetch
       - run: echo "##[set-output name=tag;]$(git tag --points-at HEAD)"
         id: tag-name #${{steps.tag-name.outputs.tag}}
-      - name: Create Github-Release
-        uses: K-Phoen/semver-release-action@master
+      - run: node ./.github/workflows/extract-changelog.js
+        id: changelog-entry
+        env:
+          VERSION: ${{steps.tag-name.outputs.tag}}
+      - name: Release
+        uses: softprops/action-gh-release@v1
         with:
-          created_tag: ${{steps.tag-name.outputs.tag}}
-          prerelease_regex: v.*-rc.*
+          body_path: "./CHANGELOG.md"
+          tag_name: ${{steps.tag-name.outputs.tag}}
+          prerelease: "false"
+          files: |
+            release-app1.zip
+            release-app2.zip
+            release-app3.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Upload app1 build to release
-        uses: svenstaro/upload-release-action@v1-release
-        with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: release-app1.zip
-          asset_name: app1-build.zip
-          tag: ${{steps.tag-name.outputs.tag}}
-          overwrite: "true"
-      - name: Upload app2 build to release
-        uses: svenstaro/upload-release-action@v1-release
-        with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: release-app2.zip
-          asset_name: app2-build.zip
-          tag: ${{steps.tag-name.outputs.tag}}
-          overwrite: "true"
-      - name: Upload app3 build to release
-        uses: svenstaro/upload-release-action@v1-release
-        with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: release-app3.zip
-          asset_name: app3-build.zip
-          tag: ${{steps.tag-name.outputs.tag}}
-          overwrite: "true"
