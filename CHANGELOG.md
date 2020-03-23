@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 3.0.0-rc.2 (2020-03-23)
+
+
+### Bug Fixes
+
+* **ci:** change github release tool ([a0cff49](https://github.com/MichaRedM/gatest/commit/a0cff492487487b4c663a4d67240a351b337c4e7))
+
 ## 3.0.0-rc.1 (2020-03-23)
 
 
