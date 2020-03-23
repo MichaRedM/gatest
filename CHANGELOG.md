@@ -2,6 +2,40 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.0.0](https://github.com/MichaRedM/gatest/compare/v3.0.0-rc.3...v3.0.0) (2020-03-23)
+
+## 3.0.0-rc.3 (2020-03-23)
+
+
+### Bug Fixes
+
+* **ci:** flooo release fix ([6d3cd6f](https://github.com/MichaRedM/gatest/commit/6d3cd6f3f3acb0e797a52e7eead9c62e842d42f4))
+
+## 3.0.0-rc.2 (2020-03-23)
+
+
+### Bug Fixes
+
+* **ci:** change github release tool ([a0cff49](https://github.com/MichaRedM/gatest/commit/a0cff492487487b4c663a4d67240a351b337c4e7))
+
+## 3.0.0-rc.1 (2020-03-23)
+
+
+### Bug Fixes
+
+* **ci:** create github release also in "Create Release Branch" ([5ebd0ba](https://github.com/MichaRedM/gatest/commit/5ebd0ba86f20ab527e29b9ae8c6ce6763c7ee888))
+
+## 3.0.0-rc.0 (2020-03-23)
+
+
+### ⚠ BREAKING CHANGES
+
+* **ci:** creates git releases
+
+### Features
+
+* **ci:** publish releases on github ([4739819](https://github.com/MichaRedM/gatest/commit/47398192a246b4c314f91e86205104bea14b4a5b))
+
 ### [2.1.1](https://github.com/MichaRedM/gatest/compare/v2.1.1-rc.0...v2.1.1) (2020-03-23)
 
 ### 2.1.1-rc.0 (2020-03-23)
