@@ -227,15 +227,19 @@ jobs:
       - run: git fetch
       - run: echo "##[set-output name=tag;]$(git tag --points-at HEAD)"
         id: tag-name #${{steps.tag-name.outputs.tag}}
+      - run: node ./.github/workflows/extract-changelog.js
+        id: changelog-entry
+        env:
+          VERSION: ${{steps.tag-name.outputs.tag}}
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
-          body_path: ${{ github.workflow }}-CHANGELOG.txt
+          body_path: "./CHANGELOG.md"
           prerelease: "true"
-          files: |
-            app1-build.zip
-            app2-build.zip
-            app3-build.zip
           tag_name: ${{steps.tag-name.outputs.tag}}
+          files: |
+            release-app1.zip
+            release-app2.zip
+            release-app3.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
